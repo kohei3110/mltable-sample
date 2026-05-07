@@ -1,0 +1,32 @@
+{
+  "data_asset_name": "animal-image-detection",
+  "exclude_reasons": {
+    "duplicate": 1,
+    "low_quality": 1
+  },
+  "excluded_rows": 2,
+  "version": "2026.07.01",
+  "release_date": "2026-07-01",
+  "active_rows": 7,
+  "splits": {
+    "train": 3,
+    "val": 2,
+    "test": 2
+  },
+  "labels": {
+    "cat": 4,
+    "dog": 3
+  },
+  "seasons": {
+    "spring": 4,
+    "summer": 3
+  },
+  "sources": {
+    "camera-a": 4,
+    "camera-b": 3
+  },
+  "source_seasons": {
+    "camera-a|spring": 4,
+    "camera-b|summer": 3
+  }
+}

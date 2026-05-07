@@ -1,0 +1,7 @@
+# The local smoke test uses only the Python standard library.
+# Install these optional packages when you want to materialize MLTable objects
+# or open images in the sample Dataset helper.
+mltable
+azureml-dataprep[pandas]
+pandas
+pillow

@@ -1,0 +1,38 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+
+display_name: train-animal-image-model-mltable-direct
+experiment_name: animal-image-detection
+description: >-
+  Alternative job that passes the MLTable reference directly to the script. Use
+  this pattern when the script calls mltable.load() and materializes the table
+  itself rather than relying on eval_mount.
+
+code: ../src
+
+command: >-
+  python train.py
+  --data ${{inputs.training_data}}
+  --epochs ${{inputs.epochs}}
+  --output_dir ${{outputs.model_output}}
+
+inputs:
+  training_data:
+    type: mltable
+    path: azureml:animal-image-detection:2026.07.01
+    mode: direct
+  epochs: 1
+
+outputs:
+  model_output:
+    type: uri_folder
+    mode: upload
+
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+  conda_file: ../environment/conda.yml
+
+compute: azureml:cpu-cluster
+
+identity:
+  type: managed_identity

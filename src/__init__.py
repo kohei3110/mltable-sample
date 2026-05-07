@@ -1,0 +1,1 @@
+"""Sample code for Azure MLTable image dataset versioning."""

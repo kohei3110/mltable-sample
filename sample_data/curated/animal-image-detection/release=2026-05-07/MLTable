@@ -1,0 +1,14 @@
+$schema: https://azuremlschemas.azureedge.net/latest/MLTable.schema.json
+type: mltable
+
+paths:
+  - file: ./manifest.csv
+
+transformations:
+  - read_delimited:
+      delimiter: ','
+      encoding: utf8
+      header: all_files_same_headers
+      empty_as_string: true
+      infer_column_types: false
+  - filter: "col('exclude_reason') == ''"

@@ -1,0 +1,44 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
+type: command
+
+display_name: train-animal-image-model-mltable-versioned
+experiment_name: animal-image-detection
+description: >-
+  Smoke training job that consumes one versioned MLTable data asset instead of
+  passing multiple seasonal raw paths to the training script.
+
+code: ../src
+
+command: >-
+  python train.py
+  --data ${{inputs.training_data}}
+  --epochs ${{inputs.epochs}}
+  --output_dir ${{outputs.model_output}}
+
+inputs:
+  training_data:
+    type: mltable
+    path: azureml:animal-image-detection:2026.07.01
+    mode: eval_mount
+  epochs: 1
+
+outputs:
+  model_output:
+    type: uri_folder
+    mode: upload
+
+environment:
+  image: mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu22.04
+  conda_file: ../environment/conda.yml
+
+# Use an Azure ML compute cluster in the same region as the storage account.
+compute: azureml:cpu-cluster
+
+# For identity-based datastores, grant the job identity or compute managed identity
+# Storage Blob Data Reader on the raw data and Storage Blob Data Contributor on outputs.
+identity:
+  type: managed_identity
+
+environment_variables:
+  # Recommended baseline for multi-epoch image training over many small files.
+  DATASET_MOUNT_BLOCK_BASED_CACHE_ENABLED: "true"

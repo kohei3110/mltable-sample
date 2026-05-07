@@ -1,0 +1,13 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+name: animal-image-detection
+version: 2026.07.01
+type: mltable
+path: ../sample_data/curated/animal-image-detection/release=2026-07-01
+description: Spring plus summer curated image dataset release for the MLTable versioning sample.
+tags:
+  task: image-classification
+  label_schema_version: v1
+  release_date: 2026-07-01
+  data_stage: curated
+  included_seasons: spring,summer
+  sample: "true"

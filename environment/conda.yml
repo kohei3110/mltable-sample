@@ -1,0 +1,11 @@
+name: mltable-image-sample
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - mltable
+      - azureml-dataprep[pandas]
+      - pandas
+      - pillow
